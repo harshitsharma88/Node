@@ -1,0 +1,7 @@
+{file- hello.js
+console.log("Hello World")}
+
+
+
+in cmd type-
+node hello.js
