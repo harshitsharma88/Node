@@ -21,7 +21,9 @@ const server = http.createServer((req, res) => {
             res.write("</body>");
             res.write("</html>")
             return res.end();
+            
         });
+        
     
        
 
@@ -33,14 +35,12 @@ const server = http.createServer((req, res) => {
         const inputData = [];
         req.on('data', (chunks) => {
             inputData.push(chunks);
-            console.log(chunks);
-            console.log(inputData);
-            
+           
         })
 
         req.on('end',()=>{
             const parsed=Buffer.concat(inputData).toString();
-            const msg= parsed.split('=')[1];
+            const msg= parsed.split('=')[1].replace('+'," ");
             rw.writeFileSync('Output.txt',msg);
            
         })
@@ -48,15 +48,6 @@ const server = http.createServer((req, res) => {
         res.statusCode = 302;
         res.setHeader('Location', '/');
         return res.end();
-        
-       /* req.on('end', () => {
-            const arr = Buffer.concat(inputData).toString();
-            const data = arr;
-            rw.writeFile('Output.txt', data, (err) => {
-                
-            })
-        })*/
-
 
     }
 
