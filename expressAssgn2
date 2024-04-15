@@ -1,0 +1,18 @@
+const express=require('express');
+const server=express();
+
+const bodyparser=require('body-parser')
+
+server.use(bodyparser.urlencoded({extended:false}));
+
+server.use('/data',(req,res)=>{
+    console.log(req.body);
+    res.send('')
+})
+
+
+server.use('/',(req,res)=>{
+    res.send('<form action="/data" method="POST"><input type="text" name="product"><input type="number" name="size"><button type="submit">Add</button></from>')
+})
+
+server.listen('3000');
