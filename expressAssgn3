@@ -1,0 +1,45 @@
+const express=require('express');
+const server=express();
+const router1=require('./routing/data1rqst')
+const router2=require('./routing/data2rqst')
+
+const bodyparser=require('body-parser')
+
+server.use(bodyparser.urlencoded({extended:false}));
+
+server.use('/admin',router1);
+server.use('/data2',router2);
+
+server.use((req,res)=>{
+    res.send("Page Not Found")
+})
+
+
+server.listen('3000');
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+const express= require('express');
+const router= express.Router();
+router.use(express.text());
+const fs=require('fs');
+
+router.post('/data1',(req,res)=>{
+    
+  res.send(req.body)
+  console.log(req.body);
+
+})
+
+router.get('/data1',(req,res)=>{
+    
+    res
+    .send
+    ('<form action="/admin/data1" method="post"><input type="text" name="product"><button type="submit">Add</button></form>');
+})
+
+module.exports=router;
